@@ -1,4 +1,15 @@
 <?php
+
+function show_price($price) {
+    $price = ceil($price);
+    if ($price < 1000) {
+        return $price . ' ' . '<b class="rub">р</b>';
+    } else {
+        $thousands = floor($price / 1000);
+        return $thousands . ' ' . substr($price,-3,3) . ' ' . '<b class="rub">р</b>';
+    }
+}
+
 // функция шаблонизатор
 function renderTemplate($page_url, $data_array) {
     $pathTemplate = __DIR__ . $page_url;
@@ -15,9 +26,27 @@ function renderTemplate($page_url, $data_array) {
 }
 
 // 2 задание
-function getLeftTime() {
-    $midnight = mktime(0, 0, 0, date('n'), date('j') + 1, date('Y'));
+date_default_timezone_set("Europe/Moscow");
+
+function getLeftTime($midnight) {
+    if (!$midnight) {
+        $midnight = mktime(0, 0, 0, date('n'), date('j') + 1, date('Y'));
+    }
+
     $left = $midnight - time();
+    // $left = $midnight; // - time();
 
     return floor($left / 3600) . ':'. floor($left % 3600 / 60);
+    // return floor($left / 86400) . ' days ' . floor($left / 86400 / 3600) . ':'. floor($left / 86400 % 3600 / 60);
+}
+
+// 4 задание с отправкой формы с добавлением лота
+function hasError() {
+    global $errors;
+    return (count($errors));
+}
+
+function checkError($field) {
+    global $errors;
+    return !empty($errors[$field]) ? 'form__item--invalid' : '';
 }

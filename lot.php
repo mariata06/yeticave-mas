@@ -14,14 +14,14 @@ $item = $items[$id];
 $lot_content = renderTemplate('/templates/lot.php', ['item' => $item, 'bets' => $bets]);
 
 $layout_content = renderTemplate('/templates/layout.php',
-    ['is_auth' => $is_auth,
-     'user_name' => $user_name,
-     'user_avatar' => $user_avatar,
-     'categories' => $categories,
-     'title' => 'Лот',
-     'content' => $lot_content,
-    ]);
+    [
+        'is_auth' => $is_auth,
+        'user_name' => $user_name,
+        'user_avatar' => $user_avatar,
+        'categories' => $categories,
+        'title' => 'Лот',
+        'content' => $lot_content,
+    ]
+);
 
 print($layout_content);
-
-

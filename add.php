@@ -3,6 +3,10 @@
 require_once 'functions.php';
 require_once 'data.php';
 
+if(!isAuth()) {
+    errorPage(403);
+}
+
 $input_temp = [];
 $errors = [];
 
@@ -110,9 +114,9 @@ $layout_content = renderTemplate('/templates/layout.php',
     [
         'content' => $page_content,
         'title' => 'Главная',
-        'is_auth' => $is_auth,
-        'user_name' => $user_name,
-        'user_avatar' => $user_avatar,
+        'is_auth' => isAuth(),
+        'user_name' => getName(),
+        'user_avatar' => getAvatar(),
         'categories' => $categories
     ]
 );

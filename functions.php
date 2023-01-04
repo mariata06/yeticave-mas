@@ -50,3 +50,20 @@ function checkError($field) {
     global $errors;
     return !empty($errors[$field]) ? 'form__item--invalid' : '';
 }
+
+// 5 задание с показом увиденных сохраненных лотов на отдельной странице history
+function getItemsHistory() {
+    $history = $_COOKIE['items-history'] ?? [];
+
+    $history = empty($history) ? [] : unserialize($history, ['allowed_classes' => false]);
+    return $history;
+}
+
+function addItemsHistory($id) {
+    $history = getItemsHistory();
+
+    $history[] = $id;
+    $history = array_unique($history, SORT_NUMERIC);
+
+    setcookie('items-history', serialize($history), time() + 7 * 86400);
+}

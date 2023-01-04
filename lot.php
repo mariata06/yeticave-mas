@@ -9,6 +9,8 @@ if(!isset($items[$id])) {
     die;
 }
 
+addItemsHistory($id);
+
 $item = $items[$id];
 
 $lot_content = renderTemplate('/templates/lot.php', ['item' => $item, 'bets' => $bets]);
